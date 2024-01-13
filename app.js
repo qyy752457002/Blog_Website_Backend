@@ -2,8 +2,8 @@
 
 var createError = require("http-errors");
 const bodyParser = require('body-parser');
-var express = require("express");
 var path = require("path");
+var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
@@ -92,7 +92,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 */
 
-//解析jwt
+// 解析jwt
 app.use(
   expressjwt({
     secret: "test12345",
@@ -146,7 +146,9 @@ app.use("/api/upload", uploadRouter);
 app.use("/api/comments", commentsRouter);
 app.use("/api/front/articles", articlesFrontRouter);
 app.use("/api/front/comments", commentsFrontRouter);
-  
+
+
+// 检查失败的处理
 app.use(function (err, req, res, next) {
     if (err.name === "UnauthorizedError") {
       res
